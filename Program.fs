@@ -1,6 +1,7 @@
 let run i =
     match i with
     | 1 -> Day01.run
+    | 2 -> Day02.run
     | _ -> printfn "Day %i not implemented" i
 
 [<EntryPoint>]
