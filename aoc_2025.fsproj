@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="extensions.fs" />
     <Compile Include="day*.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
