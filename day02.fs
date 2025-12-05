@@ -55,7 +55,7 @@ let part2 ranges =
 let run =
     printfn "== Day 02 =="
 
-    let ranges = File.ReadAllText("inputs/day02.txt") |> parse
+    let ranges = File.ReadAllText "inputs/day02.txt" |> parse
 
     printfn "Part 1: %d" (part1 ranges)
     printfn "Part 2: %d" (part2 ranges)

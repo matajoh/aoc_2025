@@ -37,7 +37,7 @@ let part2 bank = bank |> Seq.sumBy (maxJoltage 12)
 let run =
     printfn "== Day 03 =="
 
-    let bank = File.ReadLines("inputs/day03.txt") |> Seq.toList
+    let bank = File.ReadLines "inputs/day03.txt" |> Seq.toList
 
     printfn "Part 1: %A" (part1 bank)
     printfn "Part 2: %A" (part2 bank)

@@ -75,7 +75,7 @@ let part2 turns = countZeros (turn 2) turns (50, 0)
 let run =
     printfn "== Day 01 =="
 
-    let turns = File.ReadLines("inputs/day01.txt") |> Seq.map parseTurn |> Seq.toList
+    let turns = File.ReadLines "inputs/day01.txt" |> Seq.map parseTurn |> Seq.toList
 
     printfn "Part 1: %d" (part1 turns)
     printfn "Part 2: %d" (part2 turns)

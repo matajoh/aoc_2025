@@ -33,7 +33,7 @@ let run =
     printfn "== Day 04 =="
 
     let rolls =
-        File.ReadLines("inputs/day04.txt")
+        File.ReadLines "inputs/day04.txt"
         |> Seq.toList
         |> List.toGrid
         |> Grid.filter (set [ '@' ])
