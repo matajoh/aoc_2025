@@ -16,8 +16,26 @@ module Array2D =
         seq {
             for r in 0 .. Array2D.length1 a - 1 do
                 for c in 0 .. Array2D.length2 a - 1 do
-                    yield (r, c)
+                    yield r, c
         }
+
+    let toStrings a =
+        seq {
+            for r in 0 .. Array2D.length1 a - 1 do
+                yield String a.[r, 0..]
+        }
+
+    let transpose a =
+        let rows = Array2D.length1 a
+        let cols = Array2D.length2 a
+        let aT = Array2D.create cols rows (Array2D.get a 0 0)
+
+        for r in 0 .. rows - 1 do
+            for c in 0 .. cols - 1 do
+                Array2D.set aT c r (Array2D.get a r c)
+
+        aT
+
 
 type Position =
     { Row: int
@@ -277,5 +295,11 @@ module List =
 
         List.fold (fun accum x -> List.collect (inserts x) accum) [ [] ] list
 
+
 module String =
-    let split (separator: String) (string: String) = string.Split(separator) |> Array.toList
+    let split (separator: String) (string: String) = string.Split separator |> Array.toList
+
+    let splitRemoveEmpty (separator: String) (string: String) =
+        string.Split(separator, StringSplitOptions.RemoveEmptyEntries) |> Array.toList
+
+    let trim (string: String) = string.Trim()
