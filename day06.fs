@@ -57,3 +57,4 @@ let run =
 
     printfn "Part 1: %d" part1
     printfn "Part 2: %d" part2
+    printfn ""

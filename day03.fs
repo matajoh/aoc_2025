@@ -41,3 +41,4 @@ let run =
 
     printfn "Part 1: %A" (part1 bank)
     printfn "Part 2: %A" (part2 bank)
+    printfn ""

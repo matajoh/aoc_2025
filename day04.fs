@@ -40,3 +40,4 @@ let run =
 
     printfn "Part 1: %A" (part1 rolls)
     printfn "Part 2: %A" (part2 rolls)
+    printfn ""

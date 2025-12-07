@@ -59,3 +59,4 @@ let run =
 
     printfn "Part 1: %d" (part1 ranges)
     printfn "Part 2: %d" (part2 ranges)
+    printfn ""
