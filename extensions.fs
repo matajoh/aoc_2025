@@ -295,6 +295,14 @@ module List =
 
         List.fold (fun accum x -> List.collect (inserts x) accum) [ [] ] list
 
+    let selfPairs list =
+        let length = List.length list
+        seq {
+            for i in 0..length-1 do
+                let x = list.[i]
+                for j in i+1..length-1 do
+                    x, list[j]
+        }
 
 module String =
     let split (separator: String) (string: String) = string.Split separator |> Array.toList
