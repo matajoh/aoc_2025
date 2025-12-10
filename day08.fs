@@ -1,6 +1,7 @@
 module Day08
 
 open System.IO
+open Algorithms
 open Extensions
 
 type Vec3 =
