@@ -311,3 +311,7 @@ module String =
         string.Split(separator, StringSplitOptions.RemoveEmptyEntries) |> Array.toList
 
     let trim (string: String) = string.Trim()
+
+    let substring (string: String) startIndex length = string.Substring(startIndex, length)
+
+    let contains (string: String) (c: char) = string.Contains c
