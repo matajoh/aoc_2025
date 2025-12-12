@@ -206,7 +206,8 @@ type graphNode =
 
 type graph =
     { Nodes: graphNode array
-      Edges: Set<int> array }
+      Edges: Set<int> array
+      Directed: bool }
 
 
 module Graph =
@@ -229,7 +230,7 @@ module Graph =
         g.Nodes |> Seq.sortBy (fun n -> n.Degree) |> Seq.map (fun n -> n.Index)
 
 
-    let fromList list =
+    let fromList directed list =
         let lookup = new Dictionary<string, int>()
         let degree = new Dictionary<int, int>()
         let edges = new List<int * int>()
@@ -249,7 +250,9 @@ module Graph =
             let i = addNode a
             let j = addNode b
             edges.Add((i, j))
-            edges.Add((j, i))
+
+            if not directed then
+                edges.Add((j, i))
 
         let nodes =
             lookup
@@ -263,13 +266,18 @@ module Graph =
             |> Seq.toArray
 
         let edgeLookup =
-            edges
-            |> Seq.groupBy fst
-            |> Seq.sortBy fst
-            |> Seq.map (fun (_, js) -> (js |> Seq.map snd |> set))
-            |> Seq.toArray
+            [ 0 .. lookup.Count - 1 ]
+            |> List.map (fun src ->
+                edges
+                |> Seq.choose (function
+                    | a, b when a = src -> Some b
+                    | _ -> None)
+                |> set)
+            |> List.toArray
 
-        { Nodes = nodes; Edges = edgeLookup }
+        { Nodes = nodes
+          Edges = edgeLookup
+          Directed = directed }
 
 
     let clique3 g i =
@@ -315,6 +323,27 @@ module Graph =
             }
 
         bronKerbosch3 g
+
+    let countPaths source sink g =
+        let cache = new Dictionary<int, uint64>()
+
+        let rec f i =
+            if cache.ContainsKey i then
+                cache.[i]
+            else
+                let n = g.Nodes[i]
+                let paths =
+                    if n.Name = sink then
+                        uint64 1
+                    else
+                        g.Edges[i]
+                        |> Seq.sumBy f
+
+                cache.Add(i, paths)
+                paths
+
+        let src = g.Nodes |> Array.filter(fun n -> n.Name = source) |> Array.exactlyOne
+        f src.Index
 
 
 type DisjointSet =
